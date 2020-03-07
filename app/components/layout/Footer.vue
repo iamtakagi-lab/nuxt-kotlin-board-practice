@@ -2,6 +2,8 @@
     <footer>
         <div class="footer-content">
              <p>&copy; 2020  <nuxt-link to="/" class="no-decoration no-selection" style="color: #777;"> atumori.space </nuxt-link></p>
+             <p style="display: inline-block;"><nuxt-link to="/privacy-policy" class="no-decoration no-selection" style="color: #777;">プライバシーポリシー</nuxt-link></p>
+             <p style="margin-left: 10px; display: inline-block;"><nuxt-link to="/terms-of-service" class="no-decoration no-selection" style="color: #777;">利用規約</nuxt-link></p>
         </div>
     </footer>
 </template>

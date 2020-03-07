@@ -77,7 +77,16 @@ export default {
     '@nuxtjs/axios',
     '@nuxtjs/pwa',
     'nuxt-fontawesome',
-    '@nuxtjs/markdownit'
+    '@nuxtjs/markdownit',
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-159980035-1'
+    }],
+    ['@nuxtjs/google-adsense', {
+      id: 'ca-pub-793248329946064',
+      pageLevelAds: true,
+      analyticsUacct: 'UA-159980035-1',
+      analyticsDomainName: 'manji.fun'
+    }]
   ],
 
   router: {

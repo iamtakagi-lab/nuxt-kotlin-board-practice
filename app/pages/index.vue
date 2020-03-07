@@ -3,8 +3,11 @@
     <Hero/>
 
     <section class="index-tags">
-      <p style="display: inline-block;">人気のタグ:</p>
-      <nuxt-link
+       <div  class="label" style="background: #2581dc;">
+        <div class="label-text">人気のタグ</div>
+      </div>
+      <div class="tags">
+         <nuxt-link
         v-for="(tag, i) in tags.slice(0, 30)"
         :key="i"
         class="tag"
@@ -17,6 +20,8 @@
         <font-awesome-icon icon="tags" style="font-size: 13px" />
         {{tag.name}} ({{tag.count}})
       </nuxt-link>
+      </div>
+     
     </section>
 
     <section class="latest-posts">

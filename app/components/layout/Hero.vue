@@ -2,7 +2,10 @@
   <section class="hero">
     <div class="content">
       <p>
-          人と人が繋がる、共有スペース
+         人と人が繋がる
+      </p>
+      <p>
+        あつまれどうぶつの森 交流掲示板
       </p>
     </div>
   </section>

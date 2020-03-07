@@ -18,8 +18,8 @@
       <div class="text-content">
         <p v-if="plainBody" class="description">
           {{
-          plainBody.length >= 50 ?
-           plainBody.substring(0, 50) + "..." : plainBody}}
+          plainBody.length >= 80 ?
+           plainBody.substring(0, 80) + "..." : plainBody}}
         </p>
          <p v-if="post.closed" style="color: red;">Closed</p>
       </div>
