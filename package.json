@@ -1,0 +1,39 @@
+{
+  "name": "atumori.space",
+  "version": "1.0.0",
+  "description": "My superb Nuxt.js project",
+  "author": "notsmatch",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start --hostname 0.0.0.0 --port 80",
+    "generate": "nuxt generate",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^1.2.27",
+    "@fortawesome/free-brands-svg-icons": "^5.12.1",
+    "@fortawesome/free-solid-svg-icons": "^5.12.1",
+    "@fortawesome/vue-fontawesome": "^0.1.9",
+    "@nuxtjs/axios": "^5.3.6",
+    "@nuxtjs/markdownit": "^1.2.9",
+    "@nuxtjs/pwa": "^3.0.0-0",
+    "jquery": "^3.4.1",
+    "mavon-editor": "^2.7.7",
+    "moment-timezone": "^0.5.28",
+    "node-sass": "^4.13.1",
+    "nuxt": "^2.0.0",
+    "nuxt-fontawesome": "^0.4.0",
+    "remark": "^11.0.2",
+    "sass-loader": "^8.0.2",
+    "strip-markdown": "^3.1.1",
+    "vue-infinite-loading": "^2.4.4"
+  },
+  "devDependencies": {
+    "@vue/test-utils": "^1.0.0-beta.31",
+    "babel-jest": "^25.1.0",
+    "jest": "^25.1.0",
+    "vue-jest": "^3.0.5"
+  }
+}
