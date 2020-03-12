@@ -303,7 +303,8 @@ export default {
           title: this.postform.title,
           body: this.body,
           tags: this.postform.tags,
-          password: this.postform.password
+          password: this.postform.password,
+          ip: this.$store.state.address
         };
         this.preview = true;
       }

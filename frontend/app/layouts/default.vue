@@ -19,6 +19,7 @@ import PostButton from "~/components/layout/PostButton"
 import Header from "~/components/layout/Header";
 import Footer from "~/components/layout/Footer";
 export default {
+  middleware: "getAddress",
   components: {
     PostButton,
     Header,

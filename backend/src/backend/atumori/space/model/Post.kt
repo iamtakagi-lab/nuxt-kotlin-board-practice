@@ -42,7 +42,8 @@ data class Post(
     var lastBumped: Long,
     var comments: MutableList<Comment>,
     var closed: Boolean,
-    var closedAt: Long
+    var closedAt: Long,
+    var ip: String
 ) {
     fun toDocument(): Document {
         val doc = Document()
@@ -70,11 +71,13 @@ data class Post(
             json.addProperty("timestamp", comment.timestamp)
             json.addProperty("removed", comment.removed)
             json.addProperty("removedAt", comment.removedAt)
+            json.addProperty("ip", comment.ip)
             commentsArray.add(json.toString())
         }
 
         doc.put("comments", commentsArray)
         doc.put("closed", closed)
+        doc.put("ip", ip)
 
         return doc
     }
@@ -86,7 +89,8 @@ data class EditPost(
     var fc: String,
     var title: String,
     var body: String,
-    var tags: String
+    var tags: String,
+    var ip: String
 )
 
 data class NewPost(
@@ -96,5 +100,6 @@ data class NewPost(
     var title: String,
     var body: String,
     var tags: String,
-    val password: String
+    val password: String,
+    var ip: String
 )

@@ -27,7 +27,8 @@ class PostService(val mongoService: MongoService){
                             json.get("context").asString,
                             json.get("timestamp").asLong,
                             json.get("removed").asBoolean,
-                            json.get("removedAt").asLong
+                            json.get("removedAt").asLong,
+                            json.get("ip").asString
                         )
                     )
                 }
@@ -47,7 +48,8 @@ class PostService(val mongoService: MongoService){
                 getLong("lastBumped"),
                 comments,
                 getBoolean("closed"),
-                getLong("closedAt"))
+                getLong("closedAt"),
+                getString("ip"))
         }
     }
 
@@ -66,7 +68,8 @@ class PostService(val mongoService: MongoService){
             0,
             arrayListOf(),
             false,
-            0)
+            0,
+            newpost.ip)
         mongoService.replacePost(post.id, post.toDocument())
         return post
     }
@@ -80,6 +83,7 @@ class PostService(val mongoService: MongoService){
         post.title = editPost.title
         post.body = editPost.body
         post.tags = editPost.tags
+        post.ip = editPost.ip
         mongoService.replacePost(post.id, post.toDocument())
         return true
     }
@@ -104,7 +108,7 @@ class PostService(val mongoService: MongoService){
     fun addComment(id: Long, newComment: NewComment) : Boolean {
         val doc = mongoService.findPostById(id) ?: return false
         val post = toPost(doc)
-        val comment = Comment(post.comments.size.toLong()+1, newComment.username, newComment.context, Date().time, false, 0)
+        val comment = Comment(post.comments.size.toLong()+1, newComment.username, newComment.context, Date().time, false, 0, newComment.ip)
         post.comments.add(comment)
         println(post.comments)
         mongoService.replacePost(id, post.toDocument())

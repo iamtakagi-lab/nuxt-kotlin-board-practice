@@ -33,8 +33,9 @@
       </div>
       <p>{{commentform.context.length}} / {{maxContextLength}}</p>
       <p class="error" v-if="errors.context">{{errors.context}}</p>
+      <p v-if="submitted">送信中...</p>
 
-      <button class="submit-button" id="submit" style="background: #444;" type="submit">コメントする</button>
+      <button v-if="!submitted" class="submit-button" id="submit" style="background: #444;" type="submit">コメントする</button>
     </form>
 
     <Footerline :post="post" />
@@ -102,7 +103,8 @@ export default {
       },
       commentform: {
         username: "",
-        context: ""
+        context: "",
+        ip: this.$store.state.address
       }
     };
   }

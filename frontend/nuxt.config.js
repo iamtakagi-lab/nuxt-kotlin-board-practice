@@ -1,6 +1,6 @@
 
 export default {
-  mode: 'spa',
+  mode: 'universal',
   srcDir: 'app',
   /*
   ** Headers of the page
@@ -109,7 +109,8 @@ export default {
 
   router: {
     middleware: [
-      'getPosts'
+      'getPosts',
+      'getAddress'
     ]
   },
 
@@ -118,6 +119,7 @@ export default {
   ** See https://axios.nuxtjs.org/options
   */
   axios: {
+    proxy: true
   },
   /*
   ** Build configuration
@@ -139,6 +141,6 @@ export default {
   },
 
   env: {
-    AXIOS_URL: 'https://atumori.space:8443/'
+    AXIOS_URL: 'https://atumori.space:8443'
   }
 }

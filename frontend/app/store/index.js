@@ -2,7 +2,8 @@ export const state = () => ({
     allPosts: [],
     tradePosts: [],
     friendPosts: [],
-    tags: []
+    tags: [],
+    address: "127.0.0.1"
 });
 
 export const getters = {
@@ -38,6 +39,9 @@ export const getters = {
 
 
 export const mutations = {
+    setAddress(state, payload){
+        state.address = payload;
+    },
     setAllPosts(state, payload) {
         state.allPosts = []
         state.allPosts = payload

@@ -397,7 +397,8 @@ export default {
           fc: this.postform.fc,
           title: this.postform.title,
           body: this.body,
-          tags: this.postform.tags
+          tags: this.postform.tags,
+           ip: this.$store.state.address
         };
         this.preview = true;
         this.deleteConfirm = false;
