@@ -39,7 +39,7 @@ export const getters = {
 
 
 export const mutations = {
-    setAddress(state, payload){
+    setAddress(state, payload) {
         state.address = payload;
     },
     setAllPosts(state, payload) {
@@ -78,9 +78,9 @@ export const mutations = {
         }
 
         //タグの投稿数を多い順にソート
-        state.tags.sort(function(a,b){
-            if(a.count<b.count) return 1;
-            if(a.count > b.count) return -1;
+        state.tags.sort(function (a, b) {
+            if (a.count < b.count) return 1;
+            if (a.count > b.count) return -1;
             return 0;
         });
     }
