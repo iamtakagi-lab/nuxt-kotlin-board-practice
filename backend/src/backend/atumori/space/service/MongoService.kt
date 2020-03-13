@@ -16,6 +16,7 @@ class MongoService(config: ApplicationConfig) {
     val client: MongoClient
     val database: MongoDatabase
     val posts: MongoCollection<Document>
+    val reports: MongoCollection<Document>
 
     init {
         val serverAddress = ServerAddress(config.property("mongo.host").getString(), config.property("mongo.port").getString().toInt())
@@ -37,6 +38,7 @@ class MongoService(config: ApplicationConfig) {
 
         this.database = this.client.getDatabase(config.property("mongo.database").getString())
         this.posts = this.database.getCollection(config.property("mongo.collections.posts_collection").getString())
+        this.reports = this.database.getCollection(config.property("mongo.collections.reports_collection").getString())
     }
 
     fun findPostById(id: Long): Document? {
@@ -45,6 +47,13 @@ class MongoService(config: ApplicationConfig) {
 
     fun replacePost(id: Long, document: Document) {
         this.posts.replaceOne(
+            Filters.eq("id", id), document,
+            ReplaceOptions().upsert(true)
+        )
+    }
+
+    fun replaceReport(id: Long, document: Document) {
+        this.reports.replaceOne(
             Filters.eq("id", id), document,
             ReplaceOptions().upsert(true)
         )

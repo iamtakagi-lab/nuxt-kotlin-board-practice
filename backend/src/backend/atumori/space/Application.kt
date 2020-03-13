@@ -10,6 +10,10 @@ import io.ktor.server.netty.Netty
 import io.ktor.websocket.WebSockets
 import backend.atumori.space.service.MongoService
 import backend.atumori.space.service.PostService
+import io.ktor.auth.Authentication
+import io.ktor.auth.UserIdPrincipal
+import io.ktor.auth.UserPasswordCredential
+import io.ktor.auth.basic
 import io.ktor.features.*
 import io.ktor.gson.gson
 import io.ktor.http.HttpHeaders
@@ -17,8 +21,10 @@ import io.ktor.http.HttpMethod
 import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Locations
 import io.ktor.network.tls.certificates.generateCertificate
+import io.ktor.util.KtorExperimentalAPI
 import java.io.File
 
+@KtorExperimentalAPI
 @KtorExperimentalLocationsAPI
 fun Application.module() {
 
