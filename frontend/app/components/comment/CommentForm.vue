@@ -80,10 +80,7 @@ export default {
         if (this.validated) {
           this.submitted = true;
           await this.$axios
-            .post(
-              process.env.AXIOS_URL + "/post/" + this.post.id + "/comment",
-              this.commentform
-            )
+            .post(process.env.AXIOS_URL + "/post/" + this.post.id + "/comment", this.commentform)
             .then(async res => {
               await this.$store.dispatch("getPosts");
               setTimeout("location.reload()", 1000);
@@ -102,7 +99,7 @@ export default {
         context: null
       },
       commentform: {
-        username: "",
+        username: "匿名",
         context: "",
         ip: this.$store.state.address
       }

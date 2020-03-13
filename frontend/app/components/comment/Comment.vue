@@ -1,84 +1,70 @@
 <template>
-  <div class="balloon">
-    <div class="faceicon">
-      <img src="~/assets/img/png/user.png"/>
-    </div>
-    <div class="chatting">
-      <p class="username">
-        {{comment.username}}
-         <!-- <button class="delete" style="float: right; top: 0; right: 0; position: relative;"/> -->
+  <div class="comment">
+    <div class="headline">
+      <p class="username">{{comment.id}}. {{comment.username}}</p>
+      <p
+        class="date no-decoration no-selection"
+      >{{ new Date(comment.timestamp) | format-date-seconds}}</p>
+      <p class="report" @click="alert('test')">
+        [通報]
       </p>
-      <div class="says">
-        <p>{{comment.context}}</p>
-        <p style="color: grey; font-size: 14px;">{{ new Date(comment.timestamp) | format-date}}</p>
-      </div>
+      <p class="reply">
+         <font-awesome-icon icon="reply" style="font-size: 13px"/>
+        返信
+      </p>
     </div>
+    <p class="context">{{comment.context}}</p>
   </div>
 </template>
 
 <script>
-
+import { mapState, mapGetters } from "vuex";
 export default {
-  components: {
-  
-  },
-  props: ["comment"]
+  components: {},
+  props: ["comment"],
+  computed: {
+    ...mapGetters(["linkTo"])
+  }
 };
 </script>
 
 <style lang="scss" scoped>
-.balloon {
-  width: 100%;
-  padding-top: 15px;
-  margin-bottom: 20px;
-  overflow: hidden;
-}
+.comment {
+  
+  .headline {
+    font-size: 14px;
 
-.balloon .faceicon {
-  float: left;
-  margin-right: -50px;
-  width: 50px;
-}
+    .username {
+       display: inline-block;
+    }
 
-.username {
-  margin-left: 55px;
-}
+    .date {
+      display: inline-block;
+      color: grey;
+    }
 
-.balloon .faceicon img{
-  width: 100%;
-  height: auto;
-  border-radius: 50%;
-}
-.balloon .chatting {
-  width: 100%;
-  text-align: left;
-}
+    .report {
+       margin-left: 1px;
+       display: inline-block;
+       cursor: pointer;
+    }
 
-.says {
-  display: inline-block;
-  position: relative; 
-  margin: 0 0 0 60px;
-  padding: 10px;
-  max-width: 100%;
-  border-radius: 12px;
-  background: #edf1ee;
-}
+    .reply {
+       float: right;
+       display: inline-block;
+       cursor: pointer;
+    }
+  }
 
-.says:after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  top: 3px; 
-  left: -19px;
-  border: 8px solid transparent;
-  border-right: 18px solid #edf1ee;
-  -webkit-transform: rotate(35deg);
-  transform: rotate(35deg);
-}
-.says p {
-  margin: 0;
-  padding: 0;
-  word-break: break-all;
-}
+  .context {
+    margin-top: 7px;
+  }
 
+  &::before {
+    margin-bottom: 7px;
+    content: "";
+    display: block;
+    border-bottom: 1px solid lightgrey;
+  }
+}
 </style>

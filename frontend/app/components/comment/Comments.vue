@@ -1,6 +1,6 @@
 <template>
-  <section v-if="comments.length" class="wrapper">
-    
+  <section v-if="comments && comments.length" class="wrapper">
+    <h1 class="title">コメント</h1>
     <div class="comments">
       <Comment v-for="(comment, i) in comments" :key="i" :comment="comment"/>
     </div>
@@ -19,7 +19,7 @@ export default {
     }
   },
   mounted() {
-    this.$axios.get(process.env.AXIOS_URL + "/post/" + this.post.id).then((res) => {
+   this.$axios.get(process.env.AXIOS_URL + "/post/" + this.post.id).then((res) => {
         this.comments = res.data.comments
     });
   }
@@ -28,11 +28,16 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-  margin-top: 20px;
+  margin-top: 1em;
   margin-bottom: 50px;
   background: white;
   max-width: 768px;
   border-radius: 10px;
+
+  .title {
+    padding-top: .5em;
+    margin-left: 1em;
+  }
 
   .label {
     text-align: center;
@@ -55,9 +60,9 @@ export default {
     }
   }
   .comments {
-    margin-top: 20px;
-    margin-right: 20px;
-    margin-left: 20px;
+    margin-top: .5em;
+    margin-right: 1em;
+    margin-left: 1em;
     padding-bottom: 10px;
   }
 }
