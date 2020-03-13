@@ -24,16 +24,6 @@ export default {
 .wrapper {
   max-width: 768px;
   margin: 0 auto;
-
-  .comments-wrapper {
-    margin-top: 20px;
-    margin-bottom: 100px;
-    background: white;
-
-    .comments {
-
-    }
-  }
- 
+  margin-top: 1em;
 }
 </style>

@@ -62,7 +62,7 @@ export default {
 
 .headline {
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 1em;
   top: 10px;
   left: 10px;
 

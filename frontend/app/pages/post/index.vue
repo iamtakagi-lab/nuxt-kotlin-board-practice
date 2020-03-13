@@ -69,7 +69,6 @@
         </div>
         <p class="error" v-if="errors.tags">{{errors.tags}}</p>
 
-
         <div class="field">
           <input
             type="password"
@@ -117,6 +116,12 @@
           </div>
         </div>
 
+        <div class="md-checkbox" style="margin-left: 20px;">
+          <input id="terms" type="checkbox" v-model="terms" required/>
+          <label for="terms"><nuxt-link to="/terms-of-service">利用規約</nuxt-link>に同意する</label>
+        </div>
+        <p class="error" v-if="errors.terms">{{errors.terms}}</p>
+
         <div class="mavonEditor">
           <no-ssr>
             <mavon-editor
@@ -128,9 +133,7 @@
           </no-ssr>
         </div>
 
-         <p>
-          {{body.length}} / {{maxBodyLength}}
-        </p>
+        <p>{{body.length}} / {{maxBodyLength}}</p>
         <p class="error" v-if="errors.body">{{errors.body}}</p>
 
         <button
@@ -161,16 +164,16 @@
         <PreviewHeadline :post="post" />
         <Bodytext :post="post" />
 
-         <button
-            class="submit-button"
-            style="background: crimson; margin-top: 15px;"
-            @click="cancelPreview"
-          >編集画面に戻る</button>
-          <button
-            class="submit-button"
-            style="background: forestgreen; margin-top: 15px;"
-            @click="sendPost"
-          >投稿を確定する</button>
+        <button
+          class="submit-button"
+          style="background: crimson; margin-top: 15px;"
+          @click="cancelPreview"
+        >編集画面に戻る</button>
+        <button
+          class="submit-button"
+          style="background: forestgreen; margin-top: 15px;"
+          @click="sendPost"
+        >投稿を確定する</button>
       </div>
     </section>
   </div>
@@ -222,6 +225,7 @@ export default {
       this.errors.password_confirm = null;
       this.errors.type = null;
       this.errors.body = null;
+      this.errors.terms = null;
 
       if (this.postform.title.length <= 0) {
         this.errors.title = "タイトルを入力してください";
@@ -280,7 +284,11 @@ export default {
         this.errors.body = `内容を${this.maxBodyLength}文字以下にしてください`;
       }
 
-      if (  
+      if(!this.terms){
+         this.errors.terms = "利用規約への同意が得られません"
+      }
+
+      if (
         this.errors.title === null &&
         this.errors.username === null &&
         this.errors.fc === null &&
@@ -288,7 +296,8 @@ export default {
         this.errors.password_confirm === null &&
         this.errors.type === null &&
         this.errors.body === null &&
-        this.errors.tags === null
+        this.errors.tags === null &&
+        this.terms === null
       ) {
         this.validated = true;
       }
@@ -311,11 +320,13 @@ export default {
     },
     async sendPost() {
       this.preview = false;
-      await this.$axios.post(process.env.AXIOS_URL + '/post', this.post).then( async   (res) => {
-        const id = res.data.id
-        await this.$store.dispatch('getPosts')
-        this.$router.push(this.$store.getters.linkTo('post', id))
-      })
+      await this.$axios
+        .post(process.env.AXIOS_URL + "/post", this.post)
+        .then(async res => {
+          const id = res.data.id;
+          await this.$store.dispatch("getPosts");
+          this.$router.push(this.$store.getters.linkTo("post", id));
+        });
     }
   },
   data() {
@@ -336,7 +347,8 @@ export default {
         password: null,
         password_confirm: null,
         type: null,
-        body: null
+        body: null,
+        terms: null
       },
       postform: {
         title: "",
@@ -345,7 +357,8 @@ export default {
         fc: "",
         password: "",
         password_confirm: "",
-        type: "trade",        
+        type: "trade",
+        terms: false
       },
       markdownOption: {
         bold: true,
