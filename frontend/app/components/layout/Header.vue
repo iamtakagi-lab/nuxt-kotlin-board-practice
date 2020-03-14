@@ -1,7 +1,7 @@
 <template>
   <section class="navigation">
     <div class="nav-container">
-      <nuxt-link to="/" class="brand no-decoration no-selection">あつ森.space</nuxt-link>
+      <nuxt-link to="/" class="brand no-decoration no-selection">あつ森ちゃんねる</nuxt-link>
 
       <nav>
         <div class="nav-mobile">
