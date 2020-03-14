@@ -2,40 +2,46 @@
   <div class="comment">
     <div class="headline">
       <p class="username">{{comment.id}}. {{comment.username}}</p>
-      <p
-        class="date no-decoration no-selection"
-      >{{ new Date(comment.timestamp) | format-date-seconds}}</p>
-      <p class="report" @click="alert('test')">
-        [通報]
-      </p>
-      <p class="reply">
-         <font-awesome-icon icon="reply" style="font-size: 13px"/>
-        返信
-      </p>
+      <p class="date">{{ new Date(comment.timestamp) | format-date-seconds}}</p>
+      <p class="report">[通報]</p>
+      <nuxt-link
+        :to="`/post/${post.id}/${comment.id}?reply=true`" class="reply no-decoration no-selection">
+        <font-awesome-icon icon="reply" style="font-size: 13px" />返信
+      </nuxt-link>
     </div>
-    <p class="context">{{comment.context}}</p>
+    <div id="context">
+      {{comment.context}}
+    </div>
+    <nuxt-link v-if="reply && comment.replies && comment.replies.length" :to="`/post/${post.id}/${comment.id}?reply=true`">
+      {{comment.replies.length}}件の返信
+    </nuxt-link>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
+import $ from "jquery";
 export default {
   components: {},
-  props: ["comment"],
+  props: ["comment", "post", "reply"],
   computed: {
     ...mapGetters(["linkTo"])
+  },
+  mounted() {
+   
   }
 };
 </script>
 
 <style lang="scss" scoped>
 .comment {
-  
+  transition: 500ms;
+
   .headline {
     font-size: 14px;
 
     .username {
-       display: inline-block;
+      display: inline-block;
     }
 
     .date {
@@ -44,23 +50,25 @@ export default {
     }
 
     .report {
-       margin-left: 1px;
-       display: inline-block;
-       cursor: pointer;
+      margin-left: 1px;
+      display: inline-block;
+      cursor: pointer;
     }
 
     .reply {
-       float: right;
-       display: inline-block;
-       cursor: pointer;
+      color: black;
+      float: right;
+      display: inline-block;
+      cursor: pointer;
     }
   }
 
-  .context {
+  #context {
     margin-top: 7px;
   }
 
   &::before {
+    margin-top: 7px;
     margin-bottom: 7px;
     content: "";
     display: block;

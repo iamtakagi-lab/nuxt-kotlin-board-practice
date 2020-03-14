@@ -2,7 +2,7 @@
   <section v-if="comments && comments.length" class="wrapper">
     <h1 class="title">コメント</h1>
     <div class="comments">
-      <Comment v-for="(comment, i) in comments" :key="i" :comment="comment"/>
+      <Comment v-for="(comment, i) in comments" :key="i" :comment="comment" :post="post" :reply="true"/>
     </div>
   </section>
 </template>
@@ -19,8 +19,8 @@ export default {
     }
   },
   mounted() {
-   this.$axios.get(process.env.AXIOS_URL + "/post/" + this.post.id).then((res) => {
-        this.comments = res.data.comments
+   this.$axios.get(process.env.AXIOS_URL + "/post/" + this.post.id + "/comments").then((res) => {
+        this.comments = res.data;
     });
   }
 };

@@ -38,7 +38,7 @@
       <button v-if="!submitted" class="submit-button" id="submit" style="background: #444;" type="submit">コメントする</button>
     </form>
 
-    <Footerline :post="post" />
+    <Footerline :post="post"/>
   </section>
 </template>
 
@@ -46,7 +46,19 @@
 import $ from "jquery";
 import Footerline from "~/components/post/Footerline";
 export default {
-  props: ["post"],
+  props: {
+    post: {
+      required: true
+    },
+    reply: {
+      required: false
+    }
+  },
+  mounted() {
+    if(this.reply){
+       this.commentform.context = ">>" + this.reply
+    }
+  },
   components: { Footerline },
   methods: {
     validate() {
