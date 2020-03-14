@@ -26,7 +26,7 @@ export default {
   data() {
     return {
       url: `https://atumori.space${this.$route.path}`,
-      twitter_url: "https://twitter.com/intent/tweet?url={0}&text={1}&hashtags=atumorispace",
+      twitter_url: "https://twitter.com/intent/tweet?url={0}&text={1}&hashtags=atsumorich",
       line_url: "https://timeline.line.me/social-plugin/share?url={0}",
       facebook_url: "https://www.facebook.com/share.php?u={0}",
      hatebu_url: "http://b.hatena.ne.jp/add?mode=confirm&amp;url={0}&amp;title={1}",
