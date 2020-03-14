@@ -7,7 +7,7 @@ export default {
   ** Headers of the page
   */
   head: {
-    title: 'あつ森.space',
+    title: 'あつ森ちゃんねる',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -54,9 +54,9 @@ export default {
   },
 
   manifest: {
-    name: "あつ森.space",
-    title: "あつ森.space",
-    'og:title': 'あつ森.space',
+    name: "あつ森ちゃんねる",
+    title: "あつ森ちゃんねる",
+    'og:title': 'あつ森ちゃんねる',
     description: 'あつまれどうぶつの森　交流掲示板',
     'og:description': 'あつまれどうぶつの森　交流掲示板',
     lang: 'ja',
@@ -142,6 +142,6 @@ export default {
   },
 
   env: {
-    AXIOS_URL: 'https://atumori.space:8443'
+    AXIOS_URL: 'https://localhost:8443'
   }
 }
