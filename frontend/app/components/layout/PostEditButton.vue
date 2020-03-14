@@ -1,5 +1,5 @@
 <template>
-    <nuxt-link :to="linkTo('post-edit', post.id)" class="float-circle" style="background: royalblue;">
+    <nuxt-link :to="`/post/${post.id}/edit`" class="float-circle" style="background: royalblue;">
       <font-awesome-icon icon="edit" style="font-size: 50px; color: white; margin: 23px;"/>
     </nuxt-link>
 </template>
