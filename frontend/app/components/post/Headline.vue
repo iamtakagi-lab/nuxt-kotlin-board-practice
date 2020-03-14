@@ -2,7 +2,11 @@
   <div class="headline">
     <div class="top">
       <p v-if="post.closed" style="color: red; text-align: center;">この募集は締め切られました</p>
-      <div class="headline-title">{{post.title}}</div>
+      <div class="headline-title">
+        {{post.title}}
+        <p class="report">[通報]</p>
+      </div>
+
       <p class="date">投稿日: {{ new Date(post.publishedAt) | format-date }}</p>
       <p class="date" v-show="post.lastEdited">
         更新: {{ new Date(post.lastEdited) | format-date }}
@@ -18,7 +22,7 @@
     <p class="fc">フレンドコード: {{post.fc}}</p>
 
     <div class="tags" v-if="post.tags.length">
-      <p style="display: inline-block;">タグ: </p>
+      <p style="display: inline-block;">タグ:</p>
       <nuxt-link
         v-for="(tag, i) in post.tags.split(',')"
         :key="i"
@@ -29,7 +33,7 @@
            margin: 4px;"
         :to="linkTo('tag', tag)"
       >
-      <font-awesome-icon icon="tags" style="font-size: 13px" />
+        <font-awesome-icon icon="tags" style="font-size: 13px" />
         {{tag}}
       </nuxt-link>
     </div>
@@ -63,51 +67,45 @@ export default {
 .headline {
   margin-top: 10px;
   margin-left: 1em;
-  top: 10px;
-  left: 10px;
-
-  .headline-title {
-    font-size: 30px;
-    text-decoration: none !important;
-
-    @media screen and (max-width: 768px) {
-      font-size: 18px;
-    }
-
-    &:hover {
-      text-decoration: none !important;
-    }
-  }
-
-  .headline-description {
-    color: #6c7077;
-    font-size: 14px;
-    text-decoration: none !important;
-    margin-top: 15px;
-
-    &:hover {
-      text-decoration: none !important;
-    }
-  }
+  //top: 10px;
+  //left: 10px;
 
   .tags {
     margin-top: 10px;
   }
 
-  .top {
-    position: relative;
+  .username {
+    display: inline-flex;
+    margin-top: 10px;
+    color: grey;
+    font-size: 15px;
 
-    .username {
-      display: inline-flex;
-      margin-top: 10px;
-      color: grey;
-      font-size: 15px;
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
+    }
+  }
+
+  .top {
+    .headline-title {
+      font-size: 30px;
+      text-decoration: none !important;
 
       @media screen and (max-width: 768px) {
-        font-size: 12px;
+        font-size: 18px;
+      }
+
+      &:hover {
+        text-decoration: none !important;
+      }
+
+      .report {
+        font-size: 15px;
+        display: inline-block;
+        float: right;
+        cursor: pointer;
+        margin-right: 1em;
       }
     }
-
     .date {
       display: inline-flex;
       margin-top: 10px;
