@@ -64,15 +64,7 @@ data class Post(
         val commentsArray = BasicDBList()
 
         comments.forEach { comment ->
-            val json = JsonObject()
-            json.addProperty("id", comment.id)
-            json.addProperty("username", comment.username)
-            json.addProperty("context", comment.context)
-            json.addProperty("timestamp", comment.timestamp)
-            json.addProperty("removed", comment.removed)
-            json.addProperty("removedAt", comment.removedAt)
-            json.addProperty("ip", comment.ip)
-            commentsArray.add(json.toString())
+            commentsArray.add(comment.toJsonObject().toString())
         }
 
         doc.put("comments", commentsArray)
