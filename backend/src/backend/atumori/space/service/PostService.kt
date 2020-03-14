@@ -11,12 +11,21 @@ import java.util.*
 
 class PostService(val mongoService: MongoService){
 
-    fun toPost(document: Document) : Post {
-        document.apply {
-            val comments = arrayListOf<Comment>()
+    /**
+     * Utils
+     */
+    companion object {
 
-            val docClazz: Class<out MutableList<*>?> = ArrayList<String>().javaClass
-            val array = get("comments", docClazz)!!
+        /**
+         * DocumentからPostにして返す
+         */
+        fun toPost(document: Document): Post {
+
+            document.apply {
+                val comments = arrayListOf<Comment>()
+
+                val docClazz: Class<out MutableList<*>?> = ArrayList<String>().javaClass
+                val array = get("comments", docClazz)!!
 
                 for (str in array) {
                     val json = JsonUtil.JSON_PARSER.parse(str.toString()).asJsonObject
@@ -34,25 +43,30 @@ class PostService(val mongoService: MongoService){
                 }
 
 
-            return Post(
-                getLong("id"),
-                getString("type"),
-                getString("username"),
-                getString("fc"),
-                getString("title"),
-                getString("body"),
-                getString("tags"),
-                getString("password"),
-                getLong("publishedAt"),
-                getLong("lastEdited"),
-                getLong("lastBumped"),
-                comments,
-                getBoolean("closed"),
-                getLong("closedAt"),
-                getString("ip"))
+                return Post(
+                    getLong("id"),
+                    getString("type"),
+                    getString("username"),
+                    getString("fc"),
+                    getString("title"),
+                    getString("body"),
+                    getString("tags"),
+                    getString("password"),
+                    getLong("publishedAt"),
+                    getLong("lastEdited"),
+                    getLong("lastBumped"),
+                    comments,
+                    getBoolean("closed"),
+                    getLong("closedAt"),
+                    getString("ip")
+                )
+            }
         }
     }
 
+    /**
+     * 投稿を追加
+     */
     fun addPost(newpost: NewPost) : Post {
         val post = Post(
             mongoService.posts.countDocuments() + 1,
@@ -74,6 +88,9 @@ class PostService(val mongoService: MongoService){
         return post
     }
 
+    /**
+     * 投稿を編集
+     */
     fun editPost(editPost: EditPost) : Boolean {
         val doc = mongoService.findPostById(editPost.id) ?: return false
         val post = toPost(doc)
@@ -88,6 +105,9 @@ class PostService(val mongoService: MongoService){
         return true
     }
 
+    /**
+     * 投稿を締め切る
+     */
     fun closePost(id: Long) : Boolean {
         val doc = mongoService.findPostById(id) ?: return false
         val post = toPost(doc)
@@ -97,30 +117,13 @@ class PostService(val mongoService: MongoService){
         return true
     }
 
+    /**
+     * 投稿の表示順位を上げる
+     */
     fun bumpPost(id: Long) : Boolean {
         val doc = mongoService.findPostById(id) ?: return false
         val post = toPost(doc)
         post.lastBumped = Date().time
-        mongoService.replacePost(post.id, post.toDocument())
-        return true
-    }
-
-    fun addComment(id: Long, newComment: NewComment) : Boolean {
-        val doc = mongoService.findPostById(id) ?: return false
-        val post = toPost(doc)
-        val comment = Comment(post.comments.size.toLong()+1, newComment.username, newComment.context, Date().time, false, 0, newComment.ip)
-        post.comments.add(comment)
-        println(post.comments)
-        mongoService.replacePost(id, post.toDocument())
-        return true
-    }
-
-    fun removeComment(postId: Long, commentId: Long) : Boolean {
-        val doc = mongoService.findPostById(postId) ?: return false
-        val post = toPost(doc)
-        val comment = post.comments.find { comment -> comment.id == commentId } ?: return false
-        comment.removed = true
-        comment.removedAt = Date().time
         mongoService.replacePost(post.id, post.toDocument())
         return true
     }
