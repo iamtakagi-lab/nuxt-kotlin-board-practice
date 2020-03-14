@@ -297,7 +297,7 @@ export default {
         this.errors.type === null &&
         this.errors.body === null &&
         this.errors.tags === null &&
-        this.terms === null
+        this.errors.terms === null
       ) {
         this.validated = true;
       }
