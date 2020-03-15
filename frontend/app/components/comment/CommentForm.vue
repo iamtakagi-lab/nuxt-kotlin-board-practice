@@ -35,7 +35,8 @@
       <p class="error" v-if="errors.context">{{errors.context}}</p>
       <p v-if="submitted">送信中...</p>
 
-      <button v-if="!submitted" class="submit-button" id="submit" style="background: #444;" type="submit">コメントする</button>
+      <button v-if="!submitted && post.comments.length < 500" class="submit-button" id="submit" style="background: #444;" type="submit">コメントする</button>
+      <p v-else-if="post.comments.length > 500">コメントが500件を超えているため送信することはできません</p>
     </form>
 
     <Footerline :post="post"/>

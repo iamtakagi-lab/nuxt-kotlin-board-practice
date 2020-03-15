@@ -1,11 +1,14 @@
 <template>
   <section class="wrapper">
     <h1 class="title">>>{{id}} への返信</h1>
-    <div v-if="!replies.length" class="comments">
+    <div v-if="!comment.replies.length">
         返信はありません。コメントに返信してみよう。
     </div>
-    <div v-else-if="replies.length" class="comments">
-      <Comment v-for="(comment, i) in replies" :key="i" :comment="comment" :post="post" :reply="false"/>
+    <div v-else-if="comment.replies.length" class="comments">
+        <Comment :comment="comment" :post="post" :reply="false"/>
+    </div>
+    <div v-if="comment.replies.length" class="comments">
+      <Comment v-for="(reply, i) in comment.replies" :key="i" :comment="reply" :post="post" :reply="true"/>
     </div>
   </section>
 </template>
@@ -15,7 +18,7 @@ import Comment from "~/components/comment/Comment";
 import $ from "jquery";
 export default {
   components: { Comment },
-  props: ["id", "replies", "post"]
+  props: ["id", "comment", "post"]
 };
 </script>
 
