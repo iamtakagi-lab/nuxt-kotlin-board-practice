@@ -272,6 +272,11 @@ export default {
         this.post.lastBumped + 1000 * 60 * 30 - new Date().getTime();
     }
   },
+  head() {
+    return {
+      title: "投稿編集 | あつ森ちゃんねる"
+    };
+  },
   middleware: "getPosts",
   methods: {
     handleCloseConfirm() {
@@ -306,7 +311,7 @@ export default {
       this.preview = false;
       this.closeConfirm = false;
     },
-    validatePassword() {  
+    validatePassword() {
       this.validatedPassword = false;
       this.errors.password = null;
 
@@ -383,7 +388,7 @@ export default {
         this.errors.fc === null &&
         this.errors.body === null &&
         this.errors.tags === null &&
-        this.errors.bump === null 
+        this.errors.bump === null
       ) {
         this.validated = true;
       }
@@ -398,7 +403,7 @@ export default {
           title: this.postform.title,
           body: this.body,
           tags: this.postform.tags,
-           ip: this.$store.state.address
+          ip: this.$store.state.address
         };
         this.preview = true;
         this.deleteConfirm = false;

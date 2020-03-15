@@ -40,6 +40,7 @@ dependencies {
     compile "io.ktor:ktor-jackson:$ktor_version"
     compile "io.ktor:ktor-gson:$ktor_version"
     compile "io.ktor:ktor-network-tls-certificates:$ktor_version"
+    compile group: 'net.dv8tion', name: 'JDA', version: '3.8.3_460'
 
     compile group: 'org.mongodb', name: 'mongo-java-driver', version: '3.12.1'
 }

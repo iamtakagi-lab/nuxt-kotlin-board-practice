@@ -1,14 +1,13 @@
 package backend.atumori.space.service
 
 import backend.atumori.space.model.*
-import backend.atumori.space.util.JsonUtil
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
+import backend.atumori.space.util.JsonUtils
 import org.bson.Document
 import java.util.*
 
-
+/**
+ * 投稿管理サービス
+ */
 class PostService(val mongoService: MongoService){
 
     /**
@@ -28,7 +27,7 @@ class PostService(val mongoService: MongoService){
                 val array = get("comments", docClazz)!!
 
                 for (str in array) {
-                    val json = JsonUtil.JSON_PARSER.parse(str.toString()).asJsonObject
+                    val json = JsonUtils.JSON_PARSER.parse(str.toString()).asJsonObject
                     comments.add(
                         Comment(
                             json.get("id").asLong,

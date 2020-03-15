@@ -35,7 +35,7 @@ export default {
         description = file.toString();
     });
     return {
-      title: this.post.title + " - あつ森.space",
+      title: this.post.title + " | あつ森ちゃんねる",
       meta: [
         {
           hid: "description",

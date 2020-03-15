@@ -1,10 +1,10 @@
 <template>
-    <div class="wrapper">
-      <CommentReplies :id="id" :replies="replies" :post="post"/>
+  <div class="wrapper">
+    <CommentReplies v-if="comment" :id="id" :comment="comment" :post="post"/>
 
-      <CommentForm v-if="!reply" :post="post"/>
-      <CommentForm v-else-if="reply" :post="post" :reply="id"/>
-    </div>
+    <CommentForm v-if="!reply" :post="post" />
+    <CommentForm v-else-if="reply" :post="post" :reply="id" />
+  </div>
 </template>
 
 <script>
@@ -14,23 +14,30 @@ export default {
   async asyncData({ params, query, store }) {
     return {
       post: store.getters.postById(Number(params.id)),
-      id: params.commentid,
+      id: Number(params.commentid),
       reply: query["reply"] === undefined ? false : Boolean(query["reply"])
     };
-  },
-  data() {
-    return {
-      replies: []
-    }
-  },
-  mounted() {
-      this.$axios.get(process.env.AXIOS_URL + "/post/" + this.$route.params.id + "/comments").then((res) => {
-        this.replies = res.data[this.id-1].replies
-    });
   },
   components: {
     CommentReplies,
     CommentForm
+  },
+  data() {
+    return {
+      comment: null
+    }
+  },
+  mounted() {
+     this.$axios
+      .get(process.env.AXIOS_URL + "/post/" + this.id + "/comments")
+      .then(res => {
+         this.comment = res.data[this.id - 1]
+    });
+  },
+  head() {
+    return {
+      title: "コメント | あつ森ちゃんねる"
+    };
   }
 };
 </script>

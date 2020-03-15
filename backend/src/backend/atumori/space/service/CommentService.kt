@@ -3,6 +3,7 @@ package backend.atumori.space.service
 import backend.atumori.space.model.Comment
 import backend.atumori.space.model.NewComment
 import backend.atumori.space.model.Post
+import backend.atumori.space.util.NumberUtils
 import com.google.gson.JsonArray
 import com.google.gson.JsonObject
 import com.mongodb.BasicDBList
@@ -11,6 +12,9 @@ import java.lang.Integer.parseInt
 import java.util.*
 import java.util.function.Consumer
 
+/**
+ * コメント管理サービス
+ */
 class CommentService (val mongoService: MongoService){
 
     /**
@@ -45,9 +49,13 @@ class CommentService (val mongoService: MongoService){
         post.comments.forEach { comment ->
             comment.context.apply {
                 if(contains(">>")) {
-                    val replyTo = split(">")[2].replace(("[^\\d]").toRegex(), "").toInt()
-                    if (array.size() >= replyTo) {
-                        array.get(replyTo - 1).asJsonObject.get("replies").asJsonArray.add(comment.toJsonObject())
+                    var replyTo = split(">")[2].replace(("[^\\d]").toRegex(), "")
+
+                    if(NumberUtils.isInteger(replyTo)) {
+
+                        if (array.size() >= replyTo.toInt()) {
+                            array.get(replyTo.toInt() - 1).asJsonObject.get("replies").asJsonArray.add(comment.toJsonObject())
+                        }
                     }
                 }
             }

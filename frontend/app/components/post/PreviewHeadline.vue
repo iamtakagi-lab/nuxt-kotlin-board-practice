@@ -51,73 +51,65 @@ export default {
 </script>
 
 <style scoped lang="scss">
-
 .img {
-    margin-top: 20px;
-    height: auto;
-    max-width: 100%;
-    vertical-align: middle;
-    position: relative;
+  margin-top: 20px;
+  height: auto;
+  max-width: 100%;
+  vertical-align: middle;
+  position: relative;
 }
 
 .headline {
   margin-top: 10px;
   margin-left: 1em;
-  top: 10px;
-  left: 10px;
+  //top: 10px;
+  //left: 10px;
 
-  .headline-title {
-    font-size: 30px;
-    text-decoration: none !important;
-
-    @media screen and (max-width: 768px) {
-      font-size: 18px;
-    }
-
-    &:hover {
-      text-decoration: none !important;
-    }
+  .tags {
+    margin-top: 10px;
   }
 
-  .headline-description {
-    color: #6c7077;
-    font-size: 14px;
-    text-decoration: none !important;
-    margin-top: 15px;
+  .username {
+    display: inline-flex;
+    margin-top: 10px;
+    color: grey;
+    font-size: 15px;
 
-    &:hover {
-      text-decoration: none !important;
+    @media screen and (max-width: 768px) {
+      font-size: 12px;
     }
   }
 
   .top {
+    .headline-title {
+      font-size: 30px;
+      text-decoration: none !important;
 
-    position: relative;
+      @media screen and (max-width: 768px) {
+        font-size: 18px;
+      }
 
-    .tags {
-        margin-top: 10px;
+      &:hover {
+        text-decoration: none !important;
+      }
+
+      .report {
+        font-size: 15px;
+        display: inline-block;
+        float: right;
+        cursor: pointer;
+        margin-right: 1em;
+      }
     }
-
-    .username {
-      display: inline-flex;
-      margin-top: 10px;
-      color: grey;
-      font-size: 15px;
-
-       @media screen and (max-width: 768px) {
-         font-size: 12px;
-       }
-    }
-
     .date {
       display: inline-flex;
       margin-top: 10px;
       color: grey;
       font-size: 15px;
 
-       @media screen and (max-width: 768px) {
-         font-size: 12px;
-       }
+      @media screen and (max-width: 768px) {
+        font-size: 12px;
+      }
     }
   }
 }

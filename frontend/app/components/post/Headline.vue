@@ -4,7 +4,7 @@
       <p v-if="post.closed" style="color: red; text-align: center;">この募集は締め切られました</p>
       <div class="headline-title">
         {{post.title}}
-        <p class="report">[通報]</p>
+        <p class="report" @click="openModal">[通報]</p>
       </div>
 
       <p class="date">投稿日: {{ new Date(post.publishedAt) | format-date }}</p>
@@ -37,11 +37,26 @@
         {{tag}}
       </nuxt-link>
     </div>
+
+     <Modal @close="closeModal" v-if="modal">
+      <!-- default スロットコンテンツ -->
+      <p style="font-size: 18px">投稿を通報する</p>
+      <p style="font-size: 15px">※複数回、通報の送信をした場合はアクセス禁止措置を取らせていただきます。</p>
+
+      <!-- /default -->
+      <!-- footer スロットコンテンツ -->
+      <template slot="footer">
+        <button v-if="!submitted" @click="doSend">送信</button>
+        <p v-else-if="submitted">送信中...</p>
+      </template>
+      <!-- /footer -->
+    </Modal>
   </div>
 </template>
 
 <script>
 import ShareButtons from "~/components/post/ShareButtons";
+import Modal from "~/components/modal/Modal";
 import { mapState, mapGetters } from "vuex";
 export default {
   name: "Headline",
@@ -50,7 +65,36 @@ export default {
     ...mapGetters(["linkTo"])
   },
   components: {
-    ShareButtons
+    ShareButtons,
+    Modal
+  },
+  data() {
+    return {
+      modal: false,
+      submitted: false,
+    }
+  },
+  methods: {
+    openModal() {
+      this.modal = true;
+    },
+    closeModal() {
+      this.modal = false;
+    },
+    async doSend() {
+      const report = {
+        type: "post",
+        path: "post/" + this.post.id,
+        ip:  this.$store.state.address
+      };
+      this.submitted = true;
+      await this.$axios
+        .post(process.env.AXIOS_URL + "/report", report)
+        .then(async res => {
+          this.submitted = false
+          this.closeModal();
+        });
+    }
   }
 };
 </script>

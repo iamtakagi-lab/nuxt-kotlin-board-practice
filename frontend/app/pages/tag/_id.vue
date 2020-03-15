@@ -105,7 +105,7 @@ export default {
   },
   head() {
     return {
-      title: "タグ: " + this.tag + " - atumori.space"
+      title: "タグ: " + this.tag + " | あつ森ちゃんねる"
     };
   },
 };

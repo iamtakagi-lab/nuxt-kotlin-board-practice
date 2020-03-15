@@ -1,13 +1,12 @@
 package backend.atumori.space
 
-import backend.atumori.space.controller.postRouter
-import backend.atumori.space.service.CommentService
+import backend.atumori.space.controller.postController
+import backend.atumori.space.controller.reportController
+import backend.atumori.space.service.*
 import io.ktor.application.Application
 import io.ktor.application.install
 import io.ktor.routing.Routing
 import io.ktor.websocket.WebSockets
-import backend.atumori.space.service.MongoService
-import backend.atumori.space.service.PostService
 import io.ktor.features.*
 import io.ktor.gson.gson
 import io.ktor.http.HttpHeaders
@@ -23,6 +22,8 @@ fun Application.module() {
     val mongoService = MongoService(environment.config)
     val postService = PostService(mongoService)
     val commentService = CommentService(mongoService)
+    val discordService = DiscordService(environment.config)
+    val reportService = ReportService(mongoService)
 
     install(DefaultHeaders)
     install(CallLogging)
@@ -30,7 +31,8 @@ fun Application.module() {
     install(Locations)
 
     install(Routing) {
-        postRouter(mongoService, postService, commentService)
+        postController(mongoService, postService, commentService)
+        reportController(reportService, discordService)
     }
 
     install(CORS) {

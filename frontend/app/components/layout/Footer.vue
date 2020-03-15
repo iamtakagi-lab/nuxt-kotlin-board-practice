@@ -3,7 +3,7 @@
     <div class="footer-content">
       <p>
         &copy; 2020
-        <nuxt-link to="/" class="no-decoration no-selection" style="color: #777;">あつ森.space</nuxt-link>
+        <nuxt-link to="/" class="no-decoration no-selection" style="color: #777;">あつ森ちゃんねる</nuxt-link>
       </p>
       <p style="display: inline-block;">
         <nuxt-link

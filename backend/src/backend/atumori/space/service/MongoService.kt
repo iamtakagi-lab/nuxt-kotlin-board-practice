@@ -11,6 +11,9 @@ import com.mongodb.client.model.ReplaceOptions
 import io.ktor.config.ApplicationConfig
 import org.bson.Document
 
+/**
+ * Mongo管理サービス
+ */
 class MongoService(config: ApplicationConfig) {
 
     val client: MongoClient

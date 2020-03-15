@@ -46,32 +46,30 @@ data class Post(
     var ip: String
 ) {
     fun toDocument(): Document {
-        val doc = Document()
+        return Document().apply {
+            put("id", id)
+            put("type", type)
+            put("username", username)
+            put("fc", fc)
+            put("title", title)
+            put("body", body)
+            put("tags", tags)
+            put("password", password)
+            put("publishedAt", publishedAt)
+            put("lastEdited", lastEdited)
+            put("lastBumped", lastBumped)
+            put("closedAt", closedAt)
 
-        doc.put("id", id)
-        doc.put("type", type)
-        doc.put("username", username)
-        doc.put("fc", fc)
-        doc.put("title", title)
-        doc.put("body", body)
-        doc.put("tags", tags)
-        doc.put("password", password)
-        doc.put("publishedAt", publishedAt)
-        doc.put("lastEdited", lastEdited)
-        doc.put("lastBumped", lastBumped)
-        doc.put("closedAt", closedAt)
+            val commentsArray = BasicDBList()
 
-        val commentsArray = BasicDBList()
+            comments.forEach { comment ->
+                commentsArray.add(comment.toJsonObject().toString())
+            }
 
-        comments.forEach { comment ->
-            commentsArray.add(comment.toJsonObject().toString())
+            put("comments", commentsArray)
+            put("closed", closed)
+            put("ip", ip)
         }
-
-        doc.put("comments", commentsArray)
-        doc.put("closed", closed)
-        doc.put("ip", ip)
-
-        return doc
     }
 }
 

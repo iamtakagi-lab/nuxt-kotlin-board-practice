@@ -45,7 +45,12 @@
 
 <script>
 export default {
-  name: "privacy-policy"
+  name: "privacy-policy",
+   head() {
+    return {
+      title: "利用規約 | あつ森ちゃんねる"
+    };
+  },
 };
 </script>
 

@@ -70,7 +70,7 @@ export default {
       srr: false 
     },
     { 
-      src: '~/plugins/moment-filter', 
+      src: '~/plugins/moment-filter'
     }
   ],
   /*

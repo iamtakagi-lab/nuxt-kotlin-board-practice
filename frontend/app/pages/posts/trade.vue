@@ -100,7 +100,7 @@ export default {
   },
   head() {
      return {
-      title: "アイテム交換募集 - あつ森.space",
+      title: "アイテム交換募集 | あつ森ちゃんねる",
      }
   }
 };

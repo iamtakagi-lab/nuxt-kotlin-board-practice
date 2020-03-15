@@ -12,7 +12,7 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.*
 
-fun Route.postRouter(mongoService: MongoService, postService: PostService, commentService: CommentService) {
+fun Route.postController(mongoService: MongoService, postService: PostService, commentService: CommentService) {
 
 
         get("/posts") {

@@ -100,7 +100,7 @@ export default {
   },
   head() {
      return {
-      title: "フレンド募集 - あつ森.space",
+      title: "フレンド募集 | あつ森ちゃんねる",
      }
   }
 };

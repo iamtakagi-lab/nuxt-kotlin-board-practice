@@ -176,6 +176,8 @@
         >投稿を確定する</button>
       </div>
     </section>
+
+    
   </div>
 </template>
 
@@ -184,6 +186,7 @@ import $ from "jquery";
 import PreviewHeadline from "~/components/post/PreviewHeadline";
 import Bodytext from "~/components/post/Bodytext";
 export default {
+  components: { },
   mounted() {
     //入力時に郵便番号に自動でハイフンを付けるイベント
     $("#fc").on("keyup", function(e) {
@@ -205,6 +208,11 @@ export default {
         $(this).val(input.slice(0, 9) + "-" + input.slice(9, input.length));
       }
     });
+  },
+  head() {
+    return {
+      title: (this.postform.type === "trade" ? "アイテム交換" : "フレンド") + "を募集する | あつ森ちゃんねる"
+    };
   },
   components: {
     PreviewHeadline,
@@ -327,7 +335,7 @@ export default {
           await this.$store.dispatch("getPosts");
           this.$router.push(this.$store.getters.linkTo("post", id));
         });
-    }
+    },
   },
   data() {
     return {
