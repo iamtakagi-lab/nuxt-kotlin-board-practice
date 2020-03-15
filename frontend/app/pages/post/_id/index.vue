@@ -43,11 +43,11 @@ export default {
           content: description.length >= 90 ?
            description.substring(0, 90) + "..." : description
         },
-        { hid: "og:url", property: "og:url", content: "https://atumori.space/" },
+        { hid: "og:url", property: "og:url", content: "https://atsumorichannel.net/" },
         {
           hid: "og:title",
           property: "og:title",
-          content: this.post.title + " - あつ森.space"
+          content: this.post.title + " | あつ森ちゃんねる"
         },
         { hid: "og:type", property: "og:type", content: "website" },
         {
@@ -61,7 +61,7 @@ export default {
           name: "twitter:card",
           content: "summary_large_image"
         },
-        { hid: "og:site_name", property: "og:site_name", content: "あつ森.space" },
+        { hid: "og:site_name", property: "og:site_name", content: "あつ森ちゃんねる" },
         { hid: "og:locale", property: "og:locale", content: "ja_JP" }
       ]
     };

@@ -1,10 +1,7 @@
 <template>
   <section class="wrapper">
     <h1 class="title">>>{{id}} への返信</h1>
-    <div v-if="!comment.replies.length">
-        返信はありません。コメントに返信してみよう。
-    </div>
-    <div v-else-if="comment.replies.length" class="comments">
+    <div class="comments">
         <Comment :comment="comment" :post="post" :reply="false"/>
     </div>
     <div v-if="comment.replies.length" class="comments">

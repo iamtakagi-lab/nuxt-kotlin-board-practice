@@ -1,5 +1,3 @@
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
-
 export default {
   mode: 'universal',
   srcDir: 'app',
@@ -142,6 +140,6 @@ export default {
   },
 
   env: {
-    AXIOS_URL: 'https://localhost:8443'
+    AXIOS_URL: 'https://atsumorichannel.net:8443'
   }
 }
