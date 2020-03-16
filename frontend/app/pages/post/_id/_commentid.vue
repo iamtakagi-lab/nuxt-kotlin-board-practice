@@ -29,9 +29,10 @@ export default {
   },
   mounted() {
      this.$axios
-      .get(process.env.AXIOS_URL + "/post/" + this.id + "/comments")
+      .get(process.env.AXIOS_URL + "/post/" + this.post.id + "/comments")
       .then(res => {
-         this.comment = res.data[this.id - 1]
+        this.comment = res.data[this.id-1]
+         //this.comment = res.data.find(item => item.id === this.id)
     });
   },
   head() {
